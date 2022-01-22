@@ -4,6 +4,7 @@ import LoginScreen from "./screens/LoginScreen";
 import "./App.css";
 import Footer from "./components/Footer";
 import SignupScreen from "./screens/Signup";
+import withRoot from "./withRoot";
 
 function App() {
   return (
@@ -17,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRoot(App);

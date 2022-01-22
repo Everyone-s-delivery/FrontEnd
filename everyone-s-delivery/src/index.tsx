@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import "./bootstrap.min.css";
-import App from "./App";
+import "./index.css";
+import ReduxRoot from "./redux/rootRedux";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ReduxRoot />,
   document.getElementById("root")
 );
 
