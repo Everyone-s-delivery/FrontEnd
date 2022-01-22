@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
+    "declaration": true,
+    "removeComments": true,
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,7 +20,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@model": [
+          "model/* "
+      ]
+  }
   },
   "include": [
     "src"
