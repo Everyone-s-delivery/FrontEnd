@@ -1,10 +1,22 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useFormik } from "formik";
 import { useState } from "react";
-import { Col, Container, Navbar, Row, Spinner } from "react-bootstrap";
 import * as Yup from "yup";
 
 type State = {
-  username: string;
+  email: string;
   password: string;
   loading: boolean;
   message: string;
@@ -12,21 +24,42 @@ type State = {
 
 const LoginScreen: React.FC = () => {
   const [state, setState] = useState<State>({
-    username: "",
+    email: "",
     loading: false,
     password: "",
     message: "",
   });
 
+
+  const theme = createTheme();
+
+
   const validationSchema = () => {
     return Yup.object().shape({
-      username: Yup.string().required("아이디를 입력하세요."),
-      password: Yup.string().required("비밀번호를 입력하세요."),
+      email: Yup
+        .string()
+        .email('유효한 이메일 형식을 입력하세요')
+        .required('가입한 이메일 주소를 입력하세요.'),
+      password: Yup
+        .string()
+        .min(8, '비밀번호는 최소 8글자 이상입니다.')
+        .required('비밀번호를 입력하세요.'),
     });
   };
 
-  const handleLogin = (formValue: { username: string; password: string }) => {
-    const { username, password } = formValue;
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  const handleLogin = (formValue: { email: string; password: string }) => {
+    const { email, password } = formValue;
 
     setState((prev) => ({
       ...prev,
@@ -34,7 +67,7 @@ const LoginScreen: React.FC = () => {
       loading: true,
     }));
 
-    //    AuthService.login(username, password).then(
+    //    AuthService.login(email, password).then(
     //      () => {
     //        this.props.history.push("/profile");
     //        window.location.reload();
@@ -55,86 +88,82 @@ const LoginScreen: React.FC = () => {
     //   );
   };
   return (
-    <Container>
-      {/* <Row className="h-10" xs={1} md={1}>
-        <Navbar>
-          <Container>
-            <Navbar.Brand href="#">
-              <img
-                src="/logo_transparent.png"
-                width="250"
-                height="250"
-                className="d-inline-block align-top"
-              />
-            </Navbar.Brand>
-          </Container>
-        </Navbar>
-      </Row> */}
-      <Row></Row>
-      <Row>
-        <Col md={12}>
-          <div className="card card-container">
-            <img
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              alt="profile-img"
-              className="profile-img-card"
+    <ThemeProvider theme={theme}>
+      <Container maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            로그인
+          </Typography>
+          <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              placeholder={'everyone@everyone.com'}
+              label="이메일"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              name="email"
+              autoComplete="email"
+              autoFocus
             />
-
-            <Formik
-              initialValues={{ username: "", password: "" }}
-              validationSchema={validationSchema}
-              onSubmit={handleLogin}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="비밀번호"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="이 PC에서 로그인 유지"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
             >
-              <Form>
-                <div className="form-group">
-                  <label htmlFor="username">아이디</label>
-                  <Field name="username" type="text" className="form-control" />
-                  <ErrorMessage
-                    name="username"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
+              로그인
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  비밀번호 찾기
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  회원 가입
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider >
 
-                <div className="form-group">
-                  <label htmlFor="password">비밀번호</label>
-                  <Field
-                    name="password"
-                    type="password"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block"
-                    disabled={state.loading}
-                  >
-                    {state.loading && <Spinner animation="border" size="sm" />}
-                    <span>로그인</span>
-                  </button>
-                </div>
-
-                {state.message && (
-                  <div className="form-group">
-                    <div className="alert alert-danger" role="alert">
-                      {state.message}
-                    </div>
-                  </div>
-                )}
-              </Form>
-            </Formik>
-          </div>
-        </Col>
-      </Row>
-      <Row></Row>
-    </Container>
   );
 };
 
