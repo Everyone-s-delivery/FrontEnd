@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
-import { Col, Container, Navbar, Row } from "react-bootstrap";
+import { Col, Container, Navbar, Row, Spinner } from "react-bootstrap";
 import * as Yup from "yup";
 
 type State = {
@@ -20,8 +20,8 @@ const LoginScreen: React.FC = () => {
 
   const validationSchema = () => {
     return Yup.object().shape({
-      username: Yup.string().required("This field is required!"),
-      password: Yup.string().required("This field is required!"),
+      username: Yup.string().required("아이디를 입력하세요."),
+      password: Yup.string().required("비밀번호를 입력하세요."),
     });
   };
 
@@ -70,6 +70,7 @@ const LoginScreen: React.FC = () => {
           </Container>
         </Navbar>
       </Row> */}
+      <Row></Row>
       <Row>
         <Col md={12}>
           <div className="card card-container">
@@ -115,10 +116,8 @@ const LoginScreen: React.FC = () => {
                     className="btn btn-primary btn-block"
                     disabled={state.loading}
                   >
-                    {state.loading && (
-                      <span className="spinner-border spinner-border-sm"></span>
-                    )}
-                    <span>Login</span>
+                    {state.loading && <Spinner animation="border" size="sm" />}
+                    <span>로그인</span>
                   </button>
                 </div>
 
@@ -134,6 +133,7 @@ const LoginScreen: React.FC = () => {
           </div>
         </Col>
       </Row>
+      <Row></Row>
     </Container>
   );
 };
