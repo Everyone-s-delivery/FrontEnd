@@ -122,7 +122,7 @@ const SignupScreen: React.FC = () => {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="/login" variant="body2">
                                     이미 계정이 있으신가요? 로그인 하러 가기
                                 </Link>
                             </Grid>
