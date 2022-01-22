@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import React from 'react';
 
 const SignupScreen: React.FC = () => {
 
@@ -47,7 +48,6 @@ const SignupScreen: React.FC = () => {
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
             <Box
                 sx={{
                     marginTop: 8,

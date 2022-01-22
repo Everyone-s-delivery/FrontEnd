@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import React from 'react';
 
 type State = {
   email: string;
@@ -85,7 +86,6 @@ const LoginScreen: React.FC = () => {
   };
   return (
     <Container maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
