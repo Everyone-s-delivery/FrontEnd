@@ -1,19 +1,61 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import React from 'react';
+import React from "react";
+import { AnyAction, bindActionCreators, Dispatch } from "redux";
+import { loginUserAction } from "redux/authentication/authenticationActions";
+import { RootState } from "redux/rootReducer";
+import { connect, useDispatch } from "react-redux";
+import { createStyles, Theme } from "@mui/material";
+import withStyles from "@mui/material/styles/withStyles";
+import * as LoginActions from "../redux/authentication/authenticationActions";
+import { Todo } from "../model/model";
+import { useNavigate } from "react-router-dom";
+
+const styles = (theme: Theme) =>
+  createStyles({
+    main: {
+      width: "auto",
+      display: "block", // Fix IE 11 issue.
+      marginLeft: "2rem",
+      marginRight: "2rem",
+      [theme.breakpoints.up(600)]: {
+        width: 400,
+        marginLeft: "auto",
+        marginRight: "auto",
+      },
+    },
+    paper: {
+      marginTop: "2rem",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: `${3}px ${5}px ${5}px`,
+    },
+    avatar: {
+      margin: "0.5rem",
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: "0.5rem",
+    },
+    submit: {
+      marginTop: "0.5rem",
+    },
+  });
 
 type State = {
   email: string;
@@ -29,29 +71,30 @@ const LoginScreen: React.FC = () => {
     password: "",
     message: "",
   });
+  const navigate = useNavigate();
 
+  const dispatch = useDispatch();
 
   const validationSchema = () => {
     return Yup.object().shape({
-      email: Yup
-        .string()
-        .email('유효한 이메일 형식을 입력하세요')
-        .required('가입한 이메일 주소를 입력하세요.'),
-      password: Yup
-        .string()
-        .min(8, '비밀번호는 최소 8글자 이상입니다.')
-        .required('비밀번호를 입력하세요.'),
+      email: Yup.string()
+        .email("유효한 이메일 형식을 입력하세요")
+        .required("가입한 이메일 주소를 입력하세요."),
+      password: Yup.string()
+        .min(8, "비밀번호는 최소 8글자 이상입니다.")
+        .required("비밀번호를 입력하세요."),
     });
   };
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: any) => {
       alert(JSON.stringify(values, null, 2));
+      handleLogin(values);
     },
   });
 
@@ -63,6 +106,10 @@ const LoginScreen: React.FC = () => {
       message: "",
       loading: true,
     }));
+
+    // TODO: props를 통해 action과 dispatch를 받아서 처리하려고 connect를 추가한 건데
+    // router v6 버전 문제 있음. 일단 임시적으로 useDispatch를 씀
+    dispatch(loginUserAction({ email, password }));
 
     //    AuthService.login(email, password).then(
     //      () => {
@@ -89,24 +136,29 @@ const LoginScreen: React.FC = () => {
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           로그인
         </Typography>
-        <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required
             fullWidth
             id="email"
-            placeholder={'everyone@everyone.com'}
+            placeholder={"everyone@everyone.com"}
             label="이메일"
             onChange={formik.handleChange}
             value={formik.values.email}
@@ -157,8 +209,17 @@ const LoginScreen: React.FC = () => {
         </Box>
       </Box>
     </Container>
-
   );
 };
 
-export default LoginScreen;
+const mapStateToProps = (state: RootState) => ({
+  token: state.loginForm.token,
+});
+
+function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+  return {
+    actions: bindActionCreators(LoginActions as any, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

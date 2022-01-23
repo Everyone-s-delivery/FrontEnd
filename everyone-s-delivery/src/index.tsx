@@ -5,10 +5,7 @@ import "./index.css";
 import ReduxRoot from "./redux/rootRedux";
 import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
-  <ReduxRoot />,
-  document.getElementById("root")
-);
+ReactDOM.render(<ReduxRoot />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
