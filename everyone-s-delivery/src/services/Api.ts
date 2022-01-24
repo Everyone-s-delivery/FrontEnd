@@ -10,6 +10,7 @@ export enum MethodType {
 }
 
 export const loginRoute = `/signin`;
+export const signupRoute = `/signup`;
 export const listingRoute = `/api/sale_listings`;
 
 export const createApiCall = async ({

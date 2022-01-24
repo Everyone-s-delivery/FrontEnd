@@ -110,26 +110,6 @@ const LoginScreen: React.FC = () => {
     // TODO: props를 통해 action과 dispatch를 받아서 처리하려고 connect를 추가한 건데
     // router v6 버전 문제 있음. 일단 임시적으로 useDispatch를 씀
     dispatch(loginUserAction({ email, password }));
-
-    //    AuthService.login(email, password).then(
-    //      () => {
-    //        this.props.history.push("/profile");
-    //        window.location.reload();
-    //      },
-    //      (error) => {
-    //        const resMessage =
-    //          (error.response &&
-    //            error.response.data &&
-    //            error.response.data.message) ||
-    //          error.message ||
-    //          error.toString();
-
-    //        this.setState({
-    //          loading: false,
-    //          message: resMessage,
-    //        });
-    //      }
-    //   );
   };
   return (
     <Container maxWidth="xs">

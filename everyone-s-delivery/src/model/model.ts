@@ -25,6 +25,10 @@ export enum ActionType {
   LISTING_REQUEST = "action/LISTING_REQUEST",
   LISTING_REQUEST_SUCCESS = "action/LISTING_REQUEST_SUCCESS",
   LISTING_REQUEST_ERROR = "action/LISTING_REQUEST_ERROR",
+  // signup
+  SIGNUP = "action/SIGNUP",
+  SIGNUP_SUCCESS = "action/SIGNUP_SUCCESS",
+  SIGNUP_ERROR = "action/SIGNUP_ERROR",
 }
 
 export interface Action<T> {
@@ -35,4 +39,9 @@ export interface Action<T> {
 export interface LoginData {
   email: string | null;
   password: string | null;
+}
+export interface SignupData {
+  email: string | null;
+  password: string | null;
+  address: string | null;
 }

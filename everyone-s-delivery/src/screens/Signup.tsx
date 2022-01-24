@@ -2,21 +2,20 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
-import { useState } from "react";
-import * as Yup from "yup";
+import { SignupData } from "model/model";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { signupAction } from "redux/signup/signupActions";
+import * as Yup from "yup";
 
 const SignupScreen: React.FC = () => {
+  const dispatch = useDispatch();
   const validationSchema = () => {
     return Yup.object().shape({
       email: Yup.string()
@@ -36,8 +35,9 @@ const SignupScreen: React.FC = () => {
       address: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: SignupData) => {
       alert(JSON.stringify(values, null, 2));
+      dispatch(signupAction(values));
     },
   });
 
