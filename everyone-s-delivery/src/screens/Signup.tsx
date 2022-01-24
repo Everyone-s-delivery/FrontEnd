@@ -25,7 +25,7 @@ const SignupScreen: React.FC = () => {
         .min(8, "비밀번호는 최소 8글자 이상입니다.")
         .required("비밀번호를 입력하세요."),
       address: Yup.string().required("주소를 입력하세요."),
-      interestedAddress: Yup.string().required("주소를 입력하세요."),
+      interestedAddress: Yup.string().required("관심지역을 입력하세요."),
     });
   };
 
@@ -110,6 +110,27 @@ const SignupScreen: React.FC = () => {
                 onChange={formik.handleChange}
                 error={formik.touched.address && Boolean(formik.errors.address)}
                 helperText={formik.touched.address && formik.errors.address}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="interestedAddress"
+                label="관심지역"
+                type="interestedAddress"
+                id="interestedAddress"
+                autoComplete="interestedAddress"
+                value={formik.values.interestedAddress}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.interestedAddress &&
+                  Boolean(formik.errors.interestedAddress)
+                }
+                helperText={
+                  formik.touched.interestedAddress &&
+                  formik.errors.interestedAddress
+                }
               />
             </Grid>
           </Grid>
