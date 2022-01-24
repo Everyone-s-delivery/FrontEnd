@@ -43,12 +43,6 @@ export interface LoginData {
 export interface SignupData {
   email?: string;
   password?: string;
-  address?: {
-    jibunAddress: string;
-    roadAddress: string;
-  };
-  interestedAddress?: {
-    jibunAddress: string;
-    roadAddress: string;
-  };
+  address?: string;
+  interestedAddress?: string;
 }

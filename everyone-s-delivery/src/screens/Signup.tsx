@@ -24,7 +24,8 @@ const SignupScreen: React.FC = () => {
       password: Yup.string()
         .min(8, "비밀번호는 최소 8글자 이상입니다.")
         .required("비밀번호를 입력하세요."),
-      address: Yup.object().required("주소를 입력하세요."),
+      address: Yup.string().required("주소를 입력하세요."),
+      interestedAddress: Yup.string().required("주소를 입력하세요."),
     });
   };
 
@@ -32,14 +33,8 @@ const SignupScreen: React.FC = () => {
     initialValues: {
       email: "",
       password: "",
-      address: {
-        jibunAddress: "",
-        roadAddress: "",
-      },
-      interestedAddress: {
-        jibunAddress: "",
-        roadAddress: "",
-      },
+      address: "",
+      interestedAddress: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values: SignupData) => {
@@ -111,16 +106,10 @@ const SignupScreen: React.FC = () => {
                 type="address"
                 id="address"
                 autoComplete="address"
-                value={formik.values.address.roadAddress}
+                value={formik.values.address}
                 onChange={formik.handleChange}
-                error={
-                  formik.touched.address?.roadAddress &&
-                  Boolean(formik.errors.address?.roadAddress)
-                }
-                helperText={
-                  formik.touched.address?.roadAddress &&
-                  formik.errors.address?.roadAddress
-                }
+                error={formik.touched.address && Boolean(formik.errors.address)}
+                helperText={formik.touched.address && formik.errors.address}
               />
             </Grid>
           </Grid>

@@ -10,14 +10,8 @@ export interface SignupReducerType extends SignupData {
 const defaultState: SignupReducerType = {
   email: "",
   password: "",
-  address: {
-    jibunAddress: "",
-    roadAddress: "",
-  },
-  interestedAddress: {
-    jibunAddress: "",
-    roadAddress: "",
-  },
+  address: "",
+  interestedAddress: "",
   loading: false,
   error: undefined,
   message: "",
