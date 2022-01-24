@@ -164,7 +164,7 @@ const LoginScreen: React.FC = () => {
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="이 PC에서 로그인 유지"
+            label="이 기기에서 로그인 유지"
           />
           <Button
             type="submit"
