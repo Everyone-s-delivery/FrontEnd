@@ -1,25 +1,30 @@
-import { Action, ActionType, LoginData } from "../../model/model";
+import { Action, ActionType } from "../../model/model";
 import createReducer from "../createReducer";
+import { SignupData } from "./../../model/model";
 
-export interface SignupReducerType {
-  email: string;
-  password: string;
-  address: string;
+export interface SignupReducerType extends SignupData {
   loading: boolean;
   error?: string;
-  token: string;
+  message: string;
 }
 const defaultState: SignupReducerType = {
   email: "",
   password: "",
-  address: "",
+  address: {
+    jibunAddress: "",
+    roadAddress: "",
+  },
+  interestedAddress: {
+    jibunAddress: "",
+    roadAddress: "",
+  },
   loading: false,
   error: undefined,
-  token: "",
+  message: "",
 };
 
 export const signupReducer = createReducer<SignupReducerType>(defaultState, {
-  [ActionType.SIGNUP](state: SignupReducerType, action: Action<LoginData>) {
+  [ActionType.SIGNUP](state: SignupReducerType, action: Action<SignupData>) {
     return {
       ...state,
       loading: true,
@@ -36,13 +41,13 @@ export const signupReducer = createReducer<SignupReducerType>(defaultState, {
 
   [ActionType.SIGNUP_SUCCESS](
     state: SignupReducerType,
-    action: Action<number>
+    action: Action<string>
   ) {
     return {
       ...state,
       loading: false,
       error: null,
-      token: action.payload,
+      message: action.payload,
     };
   },
 });

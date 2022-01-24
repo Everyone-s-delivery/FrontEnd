@@ -11,11 +11,11 @@ function* signupSaga({ payload }: { payload: SignupData }): Generator<any> {
       url: signupRoute,
       data: payload,
     });
-    if (response.status === "ok") {
+    if (response.statusCode === "ACCEPTED") {
       //   setCookie("token", response.data.authToken.token);
       yield put({
         type: ActionType.SIGNUP_SUCCESS,
-        payload: "", //response.data.authToken.token,
+        payload: "회원가입을 성공했습니다.", //response.data.authToken.token,
       });
     } else {
       yield put({ type: ActionType.SIGNUP_ERROR, payload: "error" });

@@ -1,9 +1,7 @@
 import { Action, ActionType, LoginData } from "../../model/model";
 import createReducer from "../createReducer";
 
-export interface AuthenticationReducerType {
-  email: string;
-  password: string;
+export interface AuthenticationReducerType extends LoginData {
   loading: boolean;
   error?: string;
   token: string;

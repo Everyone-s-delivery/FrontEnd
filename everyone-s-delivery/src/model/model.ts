@@ -37,11 +37,18 @@ export interface Action<T> {
 }
 
 export interface LoginData {
-  email: string | null;
-  password: string | null;
+  email?: string;
+  password?: string;
 }
 export interface SignupData {
-  email: string | null;
-  password: string | null;
-  address: string | null;
+  email?: string;
+  password?: string;
+  address?: {
+    jibunAddress: string;
+    roadAddress: string;
+  };
+  interestedAddress?: {
+    jibunAddress: string;
+    roadAddress: string;
+  };
 }
