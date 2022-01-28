@@ -1,28 +1,21 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { createStyles, Theme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import * as Yup from "yup";
-import React from "react";
-import { AnyAction, bindActionCreators, Dispatch } from "redux";
-import { loginUserAction } from "redux/authentication/authenticationActions";
-import { RootState } from "redux/rootReducer";
-import { connect, useDispatch } from "react-redux";
-import { createStyles, Theme } from "@mui/material";
-import withStyles from "@mui/material/styles/withStyles";
-import * as LoginActions from "../redux/authentication/authenticationActions";
-import { Todo } from "../model/model";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { loginUserAction } from "redux/authentication/authenticationActions";
+import * as Yup from "yup";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -64,7 +57,7 @@ type State = {
   message: string;
 };
 
-const LoginScreen: React.FC = () => {
+const LoginScreen = () => {
   const [state, setState] = useState<State>({
     email: "",
     loading: false,
@@ -192,14 +185,4 @@ const LoginScreen: React.FC = () => {
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  token: state.loginForm.token,
-});
-
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
-  return {
-    actions: bindActionCreators(LoginActions as any, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default LoginScreen;

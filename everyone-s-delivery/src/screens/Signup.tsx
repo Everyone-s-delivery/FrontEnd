@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { signupAction } from "redux/signup/signupActions";
 import * as Yup from "yup";
 
-const SignupScreen: React.FC = () => {
+const SignupScreen = () => {
   const dispatch = useDispatch();
   const validationSchema = () => {
     return Yup.object().shape({
