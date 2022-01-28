@@ -64,7 +64,7 @@ type State = {
   message: string;
 };
 
-const LoginScreen: React.FC = () => {
+const LoginScreen = () => {
   const [state, setState] = useState<State>({
     email: "",
     loading: false,
@@ -192,14 +192,4 @@ const LoginScreen: React.FC = () => {
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  token: state.loginForm.token,
-});
-
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
-  return {
-    actions: bindActionCreators(LoginActions as any, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default LoginScreen;
