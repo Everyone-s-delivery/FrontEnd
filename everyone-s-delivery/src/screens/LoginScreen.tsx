@@ -1,5 +1,4 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createStyles, Theme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -14,41 +13,10 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUserAction } from "redux/authentication/authenticationActions";
+import { LoginIcon } from "src/components/@Icons";
+import KakaoLogin from "src/components/SocialLogin/KakaoLogin";
+import { loginUserAction } from "src/redux/authentication/authenticationActions";
 import * as Yup from "yup";
-
-const styles = (theme: Theme) =>
-  createStyles({
-    main: {
-      width: "auto",
-      display: "block", // Fix IE 11 issue.
-      marginLeft: "2rem",
-      marginRight: "2rem",
-      [theme.breakpoints.up(600)]: {
-        width: 400,
-        marginLeft: "auto",
-        marginRight: "auto",
-      },
-    },
-    paper: {
-      marginTop: "2rem",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: `${3}px ${5}px ${5}px`,
-    },
-    avatar: {
-      margin: "0.5rem",
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: "100%", // Fix IE 11 issue.
-      marginTop: "0.5rem",
-    },
-    submit: {
-      marginTop: "0.5rem",
-    },
-  });
 
 type State = {
   email: string;
@@ -164,9 +132,12 @@ const LoginScreen = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            size="large"
+            startIcon={<LoginIcon />}
           >
             로그인
           </Button>
+          <KakaoLogin />
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
