@@ -1,6 +1,6 @@
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import * as React from "react";
+import React from "react";
 
 const theme = createTheme({
     palette: {
@@ -19,8 +19,8 @@ const theme = createTheme({
     },
 });
 
-function withRoot(Component: any) {
-    function WithRoot(props: object) {
+const withRoot = (Component: any) => {
+    const WithRoot = (props: object) => {
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline />

@@ -1,7 +1,7 @@
 import { call, fork, put, takeLatest } from "redux-saga/effects";
-import { createApiCall, MethodType, signupRoute } from "services/Api";
-import { ActionType, SignupData } from "../../model/model";
-import { setCookie } from "../../utils/cookies";
+import { createApiCall, MethodType, signupRoute } from "src/services/Api";
+import { ActionType, SignupData } from "src/model/model";
+import { setCookie } from "src/utils/cookies";
 
 // signup
 function* signupSaga({ payload }: { payload: SignupData }): Generator<any> {
@@ -12,7 +12,7 @@ function* signupSaga({ payload }: { payload: SignupData }): Generator<any> {
       data: payload,
     });
     if (response.statusCode === "ACCEPTED") {
-      //   setCookie("token", response.data.authToken.token);
+        setCookie("token", response.data.authToken.token);
       yield put({
         type: ActionType.SIGNUP_SUCCESS,
         payload: "회원가입을 성공했습니다.", //response.data.authToken.token,

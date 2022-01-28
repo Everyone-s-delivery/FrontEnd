@@ -6,7 +6,8 @@ import Footer from "./components/Footer";
 import SignupScreen from "./screens/Signup";
 import withRoot from "./withRoot";
 
-function App() {
+const App = () => {
+
   return (
     <BrowserRouter>
       <Routes>

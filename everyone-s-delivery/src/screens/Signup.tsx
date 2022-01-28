@@ -8,10 +8,10 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
-import { SignupData } from "model/model";
+import { SignupData } from "src/model/model";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { signupAction } from "redux/signup/signupActions";
+import { signupAction } from "src/redux/signup/signupActions";
 import * as Yup from "yup";
 
 const SignupScreen = () => {
