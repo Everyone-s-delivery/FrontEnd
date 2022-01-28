@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "declaration": true,
-    "removeComments": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "baseUrl": ".",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,12 +16,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
+    "jsxImportSource": "@emotion/react",
     "paths": {
       "src/*": ["./src/*"],
-  }
+      "public/*": ["./public/*"]
+    }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "config.d.ts"]
 }
