@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 import { LOCAL_STORAGE_KEY, REQUEST_URL } from 'src/constants';
 import APPLICATION_ERROR_CODE from 'src/constants/applicationErrorCode';
