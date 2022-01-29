@@ -1,8 +1,8 @@
-import { put, takeLatest, fork, call } from "redux-saga/effects";
+import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
-import { createApiCall, loginRoute, MethodType } from "src/services/Api";
-import { setCookie } from "../../utils/cookies";
-import { LoginData, ActionType } from "../../model/model";
+import { ActionType, LoginData } from 'src/model/model';
+import { createApiCall, loginRoute, MethodType } from 'src/services/Api';
+import { setCookie } from '../../utils/cookies';
 
 // login
 function* loginSaga({ payload }: { payload: LoginData }): Generator<any> {
@@ -12,17 +12,17 @@ function* loginSaga({ payload }: { payload: LoginData }): Generator<any> {
       url: loginRoute,
       data: payload,
     });
-    if (response.status === "ok") {
-      setCookie("token", response.data.authToken.token);
+    if (response.status === 'ok') {
+      setCookie('token', response.data.token);
       yield put({
         type: ActionType.LOGIN_USER_SUCCESS,
         payload: response.data.authToken.token,
       });
     } else {
-      yield put({ type: ActionType.LOGIN_USER_ERROR, payload: "error" });
+      yield put({ type: ActionType.LOGIN_USER_ERROR, payload: 'error' });
     }
   } catch (error) {
-    yield put({ type: ActionType.LOGIN_USER_ERROR, payload: "error" });
+    yield put({ type: ActionType.LOGIN_USER_ERROR, payload: 'error' });
   }
 }
 function* onLoginSubmitWatcher() {

@@ -28,7 +28,7 @@
       "simple-import-sort"
     ],
     "rules": {
-      "prettier/prettier": ["error", { "singleQuote": true }],
+      "prettier/prettier": ["error", { "singleQuote": true, "endOfLine": "auto" }],
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-vars": "error",
       "@typescript-eslint/explicit-module-boundary-types": "off",

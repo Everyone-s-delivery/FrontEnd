@@ -1,11 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./bootstrap.min.css";
-import "./index.css";
-import ReduxRoot from "./redux/rootRedux";
-import reportWebVitals from "./reportWebVitals";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-ReactDOM.render(<ReduxRoot />, document.getElementById("root"));
+import ReduxRoot from './redux/rootRedux';
+import reportWebVitals from './reportWebVitals';
+
+import './bootstrap.min.css';
+import './index.css';
+
+ReactDOM.render(<ReduxRoot />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

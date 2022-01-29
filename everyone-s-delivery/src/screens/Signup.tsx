@@ -1,40 +1,39 @@
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useFormik } from "formik";
-import { SignupData } from "src/model/model";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { signupAction } from "src/redux/signup/signupActions";
-import * as Yup from "yup";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import { SignupData } from 'src/model/model';
+import { signupAction } from 'src/redux/signup/signupActions';
 
 const SignupScreen = () => {
   const dispatch = useDispatch();
-  const validationSchema = () => {
-    return Yup.object().shape({
-      email: Yup.string()
-        .email("유효한 이메일 형식을 입력하세요")
-        .required("이메일 주소를 입력하세요."),
-      password: Yup.string()
-        .min(8, "비밀번호는 최소 8글자 이상입니다.")
-        .required("비밀번호를 입력하세요."),
-      address: Yup.string().required("주소를 입력하세요."),
-      interestedAddress: Yup.string().required("관심지역을 입력하세요."),
-    });
-  };
+  const validationSchema: Yup.SchemaOf<SignupData> = Yup.object().shape({
+    email: Yup.string()
+      .email('유효한 이메일 형식을 입력하세요')
+      .required('이메일 주소를 입력하세요.'),
+    nickName: Yup.string().required('닉네임을 입력하세요.'),
+    password: Yup.string()
+      .min(8, '비밀번호는 최소 8글자 이상입니다.')
+      .required('비밀번호를 입력하세요.'),
+    address: Yup.string().required('주소를 입력하세요.'),
+  });
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      address: "",
-      interestedAddress: "",
+      email: '',
+      nickName: '',
+      password: '',
+      address: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values: SignupData) => {
@@ -48,12 +47,12 @@ const SignupScreen = () => {
       <Box
         sx={{
           marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -78,6 +77,21 @@ const SignupScreen = () => {
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="nickName"
+                label="닉네임"
+                name="nickName"
+                value={formik.values.nickName}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.nickName && Boolean(formik.errors.nickName)
+                }
+                helperText={formik.touched.nickName && formik.errors.nickName}
               />
             </Grid>
             <Grid item xs={12}>
@@ -110,27 +124,6 @@ const SignupScreen = () => {
                 onChange={formik.handleChange}
                 error={formik.touched.address && Boolean(formik.errors.address)}
                 helperText={formik.touched.address && formik.errors.address}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="interestedAddress"
-                label="관심지역"
-                type="interestedAddress"
-                id="interestedAddress"
-                autoComplete="interestedAddress"
-                value={formik.values.interestedAddress}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.interestedAddress &&
-                  Boolean(formik.errors.interestedAddress)
-                }
-                helperText={
-                  formik.touched.interestedAddress &&
-                  formik.errors.interestedAddress
-                }
               />
             </Grid>
           </Grid>

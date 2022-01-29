@@ -1,13 +1,14 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginScreen from "./screens/LoginScreen";
-import "./App.css";
-import Footer from "./components/Footer";
-import SignupScreen from "./screens/Signup";
-import withRoot from "./withRoot";
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import Footer from './components/Footer';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/Signup';
+import withRoot from './withRoot';
+
+import './App.css';
 
 const App = () => {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -18,6 +19,6 @@ const App = () => {
       <Footer />
     </BrowserRouter>
   );
-}
+};
 
 export default withRoot(App);

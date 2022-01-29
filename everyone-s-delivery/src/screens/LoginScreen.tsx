@@ -1,22 +1,24 @@
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import Container from "@mui/material/Container";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useFormik } from "formik";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { LoginIcon } from "src/components/@Icons";
-import KakaoLogin from "src/components/SocialLogin/KakaoLogin";
-import { loginUserAction } from "src/redux/authentication/authenticationActions";
-import * as Yup from "yup";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Container from '@mui/material/Container';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import { LoginIcon } from 'src/components/@Icons';
+import KakaoLogin from 'src/components/SocialLogin/KakaoLogin';
+import { LoginData } from 'src/model/model';
+import { loginUserAction } from 'src/redux/authentication/authenticationActions';
 
 type State = {
   email: string;
@@ -27,10 +29,10 @@ type State = {
 
 const LoginScreen = () => {
   const [state, setState] = useState<State>({
-    email: "",
+    email: '',
     loading: false,
-    password: "",
-    message: "",
+    password: '',
+    message: '',
   });
   const navigate = useNavigate();
 
@@ -39,32 +41,32 @@ const LoginScreen = () => {
   const validationSchema = () => {
     return Yup.object().shape({
       email: Yup.string()
-        .email("유효한 이메일 형식을 입력하세요")
-        .required("가입한 이메일 주소를 입력하세요."),
+        .email('유효한 이메일 형식을 입력하세요')
+        .required('가입한 이메일 주소를 입력하세요.'),
       password: Yup.string()
-        .min(8, "비밀번호는 최소 8글자 이상입니다.")
-        .required("비밀번호를 입력하세요."),
+        .min(8, '비밀번호는 최소 8글자 이상입니다.')
+        .required('비밀번호를 입력하세요.'),
     });
   };
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values: any) => {
+    onSubmit: (values: LoginData) => {
       alert(JSON.stringify(values, null, 2));
       handleLogin(values);
     },
   });
 
-  const handleLogin = (formValue: { email: string; password: string }) => {
+  const handleLogin = (formValue: LoginData) => {
     const { email, password } = formValue;
 
     setState((prev) => ({
       ...prev,
-      message: "",
+      message: '',
       loading: true,
     }));
 
@@ -77,12 +79,12 @@ const LoginScreen = () => {
       <Box
         sx={{
           marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -99,7 +101,7 @@ const LoginScreen = () => {
             required
             fullWidth
             id="email"
-            placeholder={"everyone@everyone.com"}
+            placeholder={'everyone@everyone.com'}
             label="이메일"
             onChange={formik.handleChange}
             value={formik.values.email}

@@ -1,5 +1,5 @@
-import { Action, ActionType, Listing } from "../../model/model";
-import createReducer from "../createReducer";
+import { Action, ActionType, Listing } from 'src/model/model';
+import createReducer from '../createReducer';
 
 export interface ListingReducerType {
   list: Listing[];
@@ -11,7 +11,7 @@ const defaultState: ListingReducerType = {
   list: [],
   loading: false,
   error: undefined,
-  nextpage: "",
+  nextpage: '',
 };
 
 export const listingReducer = createReducer<ListingReducerType>(defaultState, {

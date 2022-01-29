@@ -1,5 +1,5 @@
-import { Action, ActionType, LoginData } from "../../model/model";
-import createReducer from "../createReducer";
+import { Action, ActionType, LoginData } from 'src/model/model';
+import createReducer from '../createReducer';
 
 export interface AuthenticationReducerType extends LoginData {
   loading: boolean;
@@ -7,11 +7,11 @@ export interface AuthenticationReducerType extends LoginData {
   token: string;
 }
 const defaultState: AuthenticationReducerType = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
   loading: false,
   error: undefined,
-  token: "",
+  token: '',
 };
 
 export const authenticationReducer = createReducer<AuthenticationReducerType>(

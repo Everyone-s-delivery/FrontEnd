@@ -1,6 +1,5 @@
-import { Action, ActionType } from "../../model/model";
-import createReducer from "../createReducer";
-import { SignupData } from "./../../model/model";
+import { Action, ActionType, SignupData } from 'src/model/model';
+import createReducer from '../createReducer';
 
 export interface SignupReducerType extends SignupData {
   loading: boolean;
@@ -8,13 +7,13 @@ export interface SignupReducerType extends SignupData {
   message: string;
 }
 const defaultState: SignupReducerType = {
-  email: "",
-  password: "",
-  address: "",
-  interestedAddress: "",
+  email: '',
+  nickName: '',
+  password: '',
+  address: '',
   loading: false,
   error: undefined,
-  message: "",
+  message: '',
 };
 
 export const signupReducer = createReducer<SignupReducerType>(defaultState, {

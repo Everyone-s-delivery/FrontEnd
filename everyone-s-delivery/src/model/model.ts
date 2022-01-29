@@ -18,17 +18,17 @@ export interface Listing {
 
 export enum ActionType {
   // login
-  LOGIN_USER = "action/LOGIN_USER",
-  LOGIN_USER_SUCCESS = "action/LOGIN_USER_SUCCESS",
-  LOGIN_USER_ERROR = "action/LOGIN_USER_ERROR",
+  LOGIN_USER = 'action/LOGIN_USER',
+  LOGIN_USER_SUCCESS = 'action/LOGIN_USER_SUCCESS',
+  LOGIN_USER_ERROR = 'action/LOGIN_USER_ERROR',
   // listing
-  LISTING_REQUEST = "action/LISTING_REQUEST",
-  LISTING_REQUEST_SUCCESS = "action/LISTING_REQUEST_SUCCESS",
-  LISTING_REQUEST_ERROR = "action/LISTING_REQUEST_ERROR",
+  LISTING_REQUEST = 'action/LISTING_REQUEST',
+  LISTING_REQUEST_SUCCESS = 'action/LISTING_REQUEST_SUCCESS',
+  LISTING_REQUEST_ERROR = 'action/LISTING_REQUEST_ERROR',
   // signup
-  SIGNUP = "action/SIGNUP",
-  SIGNUP_SUCCESS = "action/SIGNUP_SUCCESS",
-  SIGNUP_ERROR = "action/SIGNUP_ERROR",
+  SIGNUP = 'action/SIGNUP',
+  SIGNUP_SUCCESS = 'action/SIGNUP_SUCCESS',
+  SIGNUP_ERROR = 'action/SIGNUP_ERROR',
 }
 
 export interface Action<T> {
@@ -37,12 +37,12 @@ export interface Action<T> {
 }
 
 export interface LoginData {
-  email?: string;
-  password?: string;
+  email: string;
+  password: string;
 }
 export interface SignupData {
-  email?: string;
+  email: string;
+  nickName: string;
   password?: string;
   address?: string;
-  interestedAddress?: string;
 }
